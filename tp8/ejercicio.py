@@ -175,7 +175,7 @@ if archivoCsv is not None:
             ventasMensualesProducto = dfProducto.groupby('Fecha')['Unidades_vendidas'].sum()
 
             fig, ax = plt.subplots(figsize=(8, 5))
-            ax.plot(ventasMensualesProducto.index, ventasMensualesProducto.values, label='Unidades vendidas', color='blue')
+            ax.plot(ventasMensualesProducto.index, ventasMensualesProducto.values, label={producto}, color='blue')
 
             X = np.array([i for i in range(len(ventasMensualesProducto))]).reshape(-1, 1)
             y = ventasMensualesProducto.values
@@ -195,7 +195,7 @@ if archivoCsv is not None:
                     ax.axvline(x=fecha, color='gray', linestyle='--', linewidth=1)
                 ax.axvline(x=fecha, color='lightgray', linestyle='--', linewidth=0.5)
 
-            ax.legend()
+            ax.legend(title='Producto')
             ax.set_xticks(pd.to_datetime([str(year) + '-01-01' for year in ventasMensualesProducto.index.year.unique()]))
             ax.set_xticklabels([str(year) for year in ventasMensualesProducto.index.year.unique()])
             st.pyplot(fig)
